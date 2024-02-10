@@ -1,8 +1,11 @@
 const readline = require('readline');
 const mylexer = require('./mylexer.js');
+const fs = require('fs');
+
+const fileStream = fs.createReadStream('input.txt', 'utf8');
 
 const rl = readline.createInterface({
-	input: process.stdin,
+	input: fileStream,
 	output: process.stdout,
 	prompt: 'ethanet > '
 });
