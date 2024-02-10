@@ -51,6 +51,8 @@ e
         { $$ = $1/$3; }
     | IDENTIFIER INCREMENT
         { $$ = {type: 'increment', identifier: $1}; }
+    | IDENTIFIER DECREMENT
+        { $$ = {type: 'decrement', identifier: $1}; }
     | NUMBER
         { $$ = Number($1); }
     ;
