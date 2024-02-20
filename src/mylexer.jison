@@ -2,9 +2,35 @@
 %lex
 %%
 
+\"(\\.|[^"\\])*\"               return 'STRING_LITERAL';
+\'(\\.|[^'\\])*\'               return 'STRING_LITERAL';
 \s+                             /* skip whitespace */
+//.*                            /* skip single-line comments */
 "ethan"                         return 'VAR'
-([a-z]|_)([a-z]|[A-Z]|[0-9])*   return 'IDENTIFIER'
+"laj"                           return 'FUNCTION'
+"for"                           return 'FOR'
+"while"                         return 'WHILE'
+"break"                         return 'BREAK'
+"continue"                      return 'CONTINUE'
+"return"                        return 'RETURN'
+"if"                            return 'IF'
+"else"                          return 'ELSE'
+"{"                             return 'LBRACE'
+"}"                             return 'RBRACE'
+"=="                            return 'EQUAL'
+"!="                            return 'NOTEQUAL'
+"<"                             return 'LESSTHAN'
+"<="                            return 'LESSTHANEQUAL'
+">"                             return 'GREATERTHAN'
+">="                            return 'GREATERTHANEQUAL'
+"&&"                            return 'AND'
+"||"                            return 'OR'
+"!"                             return 'NOT'
+"yes"                           return 'TRUE'
+"no"                            return 'FALSE'
+"null"                          return 'NULL'
+"undefined"                     return 'UNDEFINED'
+([a-z]|_)([a-zA-Z]|[0-9])*      return 'IDENTIFIER'
 "="                             return 'ASSIGN'
 [0-9]+("."[0-9]+)?\b            return 'NUMBER'
 "*"                             return 'MULT'
@@ -12,9 +38,13 @@
 "--"                            return 'DECREMENT'
 "-"                             return 'SUBTRACT'
 "++"                            return 'INCREMENT'
+"-+"                            /* Ignore */
+"+-"                            /* Ignore */
 "+"                             return 'ADD'
 "("                             return 'LPAREN'
 ")"                             return 'RPAREN'
+"["                             return 'LBRACKET'
+"]"                             return 'RBRACKET'
 ";"                             return 'SEMI'
 <<EOF>>                         return 'EOF'
 .                               return 'INVALID'
