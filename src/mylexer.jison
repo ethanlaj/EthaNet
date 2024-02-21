@@ -45,6 +45,7 @@
 ")"                             return 'RPAREN'
 "["                             return 'LBRACKET'
 "]"                             return 'RBRACKET'
+","                             return 'COMMA'
 ";"                             return 'SEMI'
 <<EOF>>                         return 'EOF'
 .                               return 'INVALID'
