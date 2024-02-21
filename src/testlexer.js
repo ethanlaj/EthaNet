@@ -1,11 +1,12 @@
-const readline = require('readline');
-const mylexer = require('./mylexer.js');
-const fs = require('fs');
+var fs = require('fs');
+var readline = require('readline');
+var JisonLex = require('jison-lex');
 
-const fileStream = fs.createReadStream('input.txt', 'utf8');
+var grammar = fs.readFileSync('lexer.jisonlex', 'utf8');
+var lexer = new JisonLex(grammar);
 
 const rl = readline.createInterface({
-	input: fileStream,
+	input: process.stdin,
 	output: process.stdout,
 	prompt: 'ethanet > '
 });
@@ -13,14 +14,18 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on('line', (line) => {
-	try {
-		// Use the parser's parse function directly with the input line
-		const result = mylexer.parse(line);
-		console.log("Parsed result:", result);
-	} catch (error) {
-		// Catch and log any parsing errors
-		console.error("Parsing error:", error.message);
+	lexer.setInput(line);
+
+	let token;
+	while (true) {
+		token = lexer.lex();
+		if (token === 1) {
+			break;
+		}
+
+		console.log({ token, value: lexer.yytext });
 	}
+
 	rl.prompt();
 }).on('close', () => {
 	console.log('Exiting ethanet console.');
