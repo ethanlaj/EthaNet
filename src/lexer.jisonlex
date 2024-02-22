@@ -2,7 +2,7 @@
 \"(\\.|[^"\\])*\"               return 'STRING_LITERAL';
 \'(\\.|[^'\\])*\'               return 'STRING_LITERAL';
 \s+                             /* skip whitespace */
-//.*                            /* skip single-line comments */
+"//".*							/* skip comments */
 "ethan"                         return 'VAR'
 "laj"                           return 'FUNCTION'
 "for"                           return 'FOR'
