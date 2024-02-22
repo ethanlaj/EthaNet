@@ -5,29 +5,34 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ethanet</title>
-
 	<link rel="stylesheet" href="index.css">
-	<script src="index.js"></script>
-	<script src="lexer.js"></script>
 </head>
 
 <body>
 	<header>
 		<h1>Ethanet Programming Language</h1>
 		<p>Try the Ethanet lexer below. Enter your code and click "Send" to see the tokens.</p>
+		<p>Learn more about Ethanet: <a href="https://github.com/ethanlaj/EthaNet/wiki/Language-Features"
+				target="_blank">Ethanet Language Features Documentation</a>.</p>
 	</header>
 
-	<label for="input">Enter your Ethanet code here:</label>
-	<textarea id="input" rows="10" placeholder="e.g., ethan x = 5;"></textarea>
-
-	<button id="send">Send</button>
+	<div class="inputContainer">
+		<label for="input">Enter your Ethanet code here:</label>
+		<textarea id="input" rows="15" placeholder="e.g., ethan x = 5;"></textarea>
+		<button id="send">Send</button>
+	</div>
 
 	<h2>Lexer Output:</h2>
 	<p id="output"></p>
 
 	<footer>
 		<p>Created by Ethan Lajeunesse</p>
+		<!-- Optional: Another place for the Documentation Link if desired -->
+		<a href="https://github.com/ethanlaj/EthaNet" target="_blank">GitHub</a>
 	</footer>
+
+	<script src="index.js"></script>
+	<script src="lexer.js"></script>
 </body>
 
 </html>
