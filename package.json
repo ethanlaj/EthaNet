@@ -1,0 +1,10 @@
+{
+  "name": "ethanet",
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "jison-lex src/lexer.jisonlex -o web/lexer.js"
+  },
+  "dependencies": {
+    "jison-lex": "^0.3.4"
+  }
+}

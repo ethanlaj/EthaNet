@@ -1,8 +1,10 @@
 var fs = require('fs');
 var readline = require('readline');
+var path = require('path');
 var JisonLex = require('jison-lex');
 
-var grammar = fs.readFileSync('lexer.jisonlex', 'utf8');
+var grammarPath = path.join(__dirname, 'lexer.jisonlex');
+var grammar = fs.readFileSync(grammarPath, 'utf8');
 var lexer = new JisonLex(grammar);
 
 const rl = readline.createInterface({
