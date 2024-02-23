@@ -32,6 +32,7 @@
 [0-9]+("."[0-9]+)?\b            return 'NUMBER'
 "*"                             return 'MULT'
 "/"                             return 'DIV'
+"%"                             return 'MOD'
 "--"                            return 'DECREMENT'
 "-"                             return 'SUBTRACT'
 "++"                            return 'INCREMENT'

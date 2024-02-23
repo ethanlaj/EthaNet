@@ -1,0 +1,3 @@
+laj add(x, y) {
+	return x + y;
+}
