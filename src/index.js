@@ -1,11 +1,7 @@
 var fs = require('fs');
 var readline = require('readline');
 var path = require('path');
-var JisonLex = require('jison-lex');
-
-var grammarPath = path.join(__dirname, 'lexer.jisonlex');
-var grammar = fs.readFileSync(grammarPath, 'utf8');
-var lexer = new JisonLex(grammar);
+var parser = require('./parser.js');
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -16,18 +12,12 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on('line', (line) => {
-	lexer.setInput(line);
-
-	let token;
-	while (true) {
-		token = lexer.lex();
-		if (token === 1) {
-			break;
-		}
-
-		console.log({ token, value: lexer.yytext });
+	try {
+		var output = parser.parse(line);
+		console.log(JSON.stringify(output, null, 2));
+	} catch (e) {
+		console.error('Parse error:', e.message);
 	}
-
 	rl.prompt();
 }).on('close', () => {
 	console.log('Exiting ethanet console.');

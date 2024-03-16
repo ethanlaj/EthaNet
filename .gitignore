@@ -1,4 +1,5 @@
 mylexer.js
 node_modules
 lexer.js
+parser.js
 .DS_Store
