@@ -195,63 +195,91 @@ const Operator = {
 
 class NodeVisitor {
 	visitProgramNode(node) {
-		throw new Error("Method 'visitProgramNode()' must be implemented.");
+		console.log("Program:");
+		node.statements.forEach(statement => statement.accept(this));
 	};
 
 	visitVariableDeclarationNode(node) {
-		throw new Error("Method 'visitVariableDeclarationNode()' must be implemented.");
-	}
-
-	visitFunctionDeclarationNode(node) {
-		throw new Error("Method 'visitFunctionDeclarationNode()' must be implemented.");
+		console.log(`VariableDeclaration: ${node.identifier}`);
+		node.expression.accept(this);
 	}
 
 	visitBinaryExpressionNode(node) {
-		throw new Error("Method 'visitBinaryExpressionNode()' must be implemented.");
+		console.log(`BinaryExpression: ${node.operator}`);
+		node.left.accept(this);
+		node.right.accept(this);
 	}
 
 	visitUnaryExpressionNode(node) {
-		throw new Error("Method 'visitUnaryExpressionNode()' must be implemented.");
+		console.log(`UnaryExpression: ${node.operator}`);
+		node.argument.accept(this);
+	}
+
+	visitFunctionDeclarationNode(node) {
+		console.log(`FunctionDeclaration: ${node.name}`);
+		node.params.forEach(param => param.accept(this));
+		node.body.accept(this);
 	}
 
 	visitLiteralNode(node) {
-		throw new Error("Method 'visitLiteralNode()' must be implemented.");
+		console.log(`Literal: ${node.value}`);
 	}
 
 	visitIdentifierNode(node) {
-		throw new Error("Method 'visitIdentifierNode()' must be implemented.");
+		console.log(`Identifier: ${node.name}`);
 	}
 
 	visitBlockStatementNode(node) {
-		throw new Error("Method 'visitBlockStatementNode()' must be implemented.");
+		console.log("BlockStatement:");
+		node.statements.forEach(statement => statement.accept(this));
 	}
 
 	visitIfStatementNode(node) {
-		throw new Error("Method 'visitIfStatementNode()' must be implemented.");
+		console.log("IfStatement:");
+		console.log("Condition:");
+		node.condition.accept(this);
+		console.log("Consequent:");
+		node.consequent.accept(this);
+		if (node.alternate) {
+			console.log("Alternate:");
+			node.alternate.accept(this);
+		}
 	}
 
 	visitWhileLoopNode(node) {
-		throw new Error("Method 'visitWhileLoopNode()' must be implemented.");
+		console.log("WhileLoop:");
+		console.log("Condition:");
+		node.condition.accept(this);
+		console.log("Body:");
+		node.body.accept(this);
 	}
 
 	visitForLoopNode(node) {
-		throw new Error("Method 'visitForLoopNode()' must be implemented.");
+		console.log("ForLoop:");
+		console.log("Initializer:");
+		node.initializer.accept(this);
+		console.log("Condition:");
+		node.condition.accept(this);
+		console.log("Update:");
+		node.update.accept(this);
+		console.log("Body:");
+		node.body.accept(this);
 	}
 
 	visitArrayAccessNode(node) {
-		throw new Error("Method 'visitArrayAccessNode()' must be implemented.");
+		console.log(`ArrayAccess: ${node.identifier}`);
+		console.log("Index:");
+		node.index.accept(this);
 	}
 
 	visitReturnStatementNode(node) {
-		throw new Error("Method 'visitReturnStatementNode()' must be implemented.");
+		console.log("ReturnStatement:");
+		node.expression.accept(this);
 	}
 
 	visitExpressionStatementNode(node) {
-		throw new Error("Method 'visitExpressionStatementNode()' must be implemented.");
-	}
-
-	visitUnaryExpressionNode(node) {
-		throw new Error("Method 'visitUnaryExpressionNode()' must be implemented.");
+		console.log("ExpressionStatement:");
+		node.expression.accept(this);
 	}
 }
 

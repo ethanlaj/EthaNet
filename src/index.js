@@ -14,6 +14,7 @@ rl.prompt();
 rl.on('line', (line) => {
 	try {
 		var output = parser.parse(line);
+		console.log(output)
 		console.log(JSON.stringify(output, null, 2));
 	} catch (e) {
 		console.error('Parse error:', e.message);

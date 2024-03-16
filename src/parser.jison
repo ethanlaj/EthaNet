@@ -75,9 +75,14 @@
 
 /lex
 
-%start program
+%start start
 
 %% /* language grammar in BNF format */
+
+start
+    : program
+        {return $1;}
+    ;
 
 program
 	: statement_list
