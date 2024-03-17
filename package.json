@@ -2,9 +2,18 @@
   "name": "ethanet",
   "scripts": {
     "dev": "nodemon --watch src/lexer.jison --exec node src/index.js",
-    "build": "jison-lex src/lexer.jisonlex -o web/lexer.js"
+    "build": "jison src/parser.jison -o web/parser.js && cp src/nodes.js web && webpack --mode=production"
   },
   "dependencies": {
-    "jison-lex": "^0.3.4"
+    "jison": "^0.4.18",
+    "json-formatter-js": "^2.3.4",
+    "path-browserify": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "babel-loader": "^9.1.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -65,6 +65,18 @@ class FunctionDeclarationNode extends Node {
 	}
 }
 
+class FunctionCallNode extends Node {
+	constructor(callee, args) {
+		super();
+		this.callee = callee;
+		this.args = args;
+	}
+
+	accept(visitor) {
+		visitor.visitFunctionCallNode(this);
+	}
+}
+
 class LiteralNode extends Node {
 	constructor(value) {
 		super();
@@ -289,6 +301,7 @@ module.exports = {
 	VariableDeclarationNode,
 	BinaryExpressionNode,
 	FunctionDeclarationNode,
+	FunctionCallNode,
 	LiteralNode,
 	IdentifierNode,
 	BlockStatementNode,

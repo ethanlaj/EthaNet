@@ -1,3 +1,6 @@
+var parser = require('./parser.js');
+var JSONFormatter = require('json-formatter-js');
+
 (function () {
 	document.addEventListener("DOMContentLoaded", init);
 
@@ -11,19 +14,18 @@
 		const output = document.getElementById('output');
 
 		const line = input.value;
-		console.log(line)
-		lexer.setInput(line);
 
-		let result = '';
-		while (true) {
-			let token = lexer.lex();
-			if (token === 1) {
-				break;
-			}
-
-			result += `Token: ${token}, Value: ${lexer.yytext}<br>`;
+		var parserOutput;
+		try {
+			parserOutput = parser.parse(line);
+		} catch (e) {
+			output.innerHTML = 'Parse error: ' + e.message;
+			return;
 		}
 
-		output.innerHTML = result;
+		console.log({ parserOutput })
+
+		output.innerHTML = '';
+		output.appendChild(new JSONFormatter(parserOutput, Infinity).render());
 	}
 })();

@@ -3,3 +3,5 @@ node_modules
 lexer.js
 parser.js
 .DS_Store
+web/nodes.js
+dist

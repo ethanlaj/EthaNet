@@ -1,6 +1,4 @@
-var fs = require('fs');
 var readline = require('readline');
-var path = require('path');
 var parser = require('./parser.js');
 
 const rl = readline.createInterface({
@@ -14,7 +12,6 @@ rl.prompt();
 rl.on('line', (line) => {
 	try {
 		var output = parser.parse(line);
-		console.log(output)
 		console.log(JSON.stringify(output, null, 2));
 	} catch (e) {
 		console.error('Parse error:', e.message);

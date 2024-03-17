@@ -11,7 +11,7 @@
 <body>
 	<header>
 		<h1>Ethanet Programming Language</h1>
-		<p>Try the Ethanet lexer below. Enter your code and click "Send" to see the tokens.</p>
+		<p>Try the Ethanet parser below. Enter your code and click "Send" to see the AST parse tree.</p>
 		<p>Learn more about Ethanet: <a href="https://github.com/ethanlaj/EthaNet/wiki/Language-Features"
 				target="_blank">Ethanet Language Features Documentation</a>.</p>
 	</header>
@@ -22,7 +22,7 @@
 		<button id="send">Send</button>
 	</div>
 
-	<h2>Lexer Output:</h2>
+	<h2>Parser Output:</h2>
 	<p id="output"></p>
 
 	<footer>
@@ -31,8 +31,7 @@
 		<a href="https://github.com/ethanlaj/EthaNet" target="_blank">GitHub</a>
 	</footer>
 
-	<script src="index.js"></script>
-	<script src="lexer.js"></script>
+	<script src="dist/bundle.js"></script>
 </body>
 
 </html>
