@@ -17,6 +17,8 @@
         ReturnStatementNode,
         ExpressionStatementNode,
         UnaryExpressionNode,
+        ContinueStatementNode,
+        BreakStatementNode,
     } = require('./nodes');
 %}
 
@@ -115,6 +117,20 @@ statement
         {$$ = $1;}
     | expression_statement
         {$$ = $1;}
+    | continue_statement
+        {$$ = $1;}
+    | break_statement
+        {$$ = $1;}
+    ;
+
+continue_statement
+    : CONTINUE SEMI
+        {$$ = new ContinueStatementNode();}
+    ;
+
+break_statement
+    : BREAK SEMI
+        {$$ = new BreakStatementNode();}
     ;
 
 variable_declaration
@@ -238,6 +254,10 @@ factor
         {$$ = new LiteralNode($1);}
     | STRING_LITERAL
         {$$ = new LiteralNode($1);}
+    | TRUE
+        {$$ = new LiteralNode(true);}
+    | FALSE
+        {$$ = new LiteralNode(false);}
     | function_call
         {$$ = $1;}
     | IDENTIFIER
