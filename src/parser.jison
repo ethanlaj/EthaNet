@@ -19,6 +19,7 @@
         UnaryExpressionNode,
         ContinueStatementNode,
         BreakStatementNode,
+        ArrayLiteralNode
     } = require('./nodes');
 %}
 
@@ -123,6 +124,20 @@ statement
         {$$ = $1;}
     ;
 
+array_elements
+    : /* empty */
+        {$$ = [];}
+    | expression_list
+        {$$ = $1;}
+    ;
+
+expression_list
+    : expression
+        {$$ = [$1];}
+    | expression_list COMMA expression
+        {$$ = $1.concat([$3]);}
+    ;
+
 continue_statement
     : CONTINUE SEMI
         {$$ = new ContinueStatementNode();}
@@ -194,6 +209,13 @@ block
 expression
     : logical_expression
         {$$ = $1;}
+    | array_expression
+        {$$ = $1;}
+    ;
+
+array_expression
+    : LBRACKET array_elements RBRACKET
+        {$$ = new ArrayLiteralNode($2);}
     ;
 
 logical_expression

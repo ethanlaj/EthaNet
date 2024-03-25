@@ -161,6 +161,17 @@ class ArrayAccessNode extends Node {
 	}
 }
 
+class ArrayLiteralNode extends Node {
+	constructor(elements) {
+		super();
+		this.elements = elements;
+	}
+
+	accept(visitor) {
+		visitor.visitArrayLiteralNode(this);
+	}
+}
+
 class ReturnStatementNode extends Node {
 	constructor(expression) {
 		super();
@@ -237,4 +248,5 @@ module.exports = {
 	UnaryExpressionNode,
 	ContinueStatementNode,
 	BreakStatementNode,
+	ArrayLiteralNode,
 };
