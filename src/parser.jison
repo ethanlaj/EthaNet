@@ -282,6 +282,8 @@ factor
         {$$ = new LiteralNode(false);}
     | NOT factor
         {$$ = new UnaryExpressionNode(Operator.Not, $2);}
+    | SUBTRACT factor
+        {$$ = new UnaryExpressionNode(Operator.Minus, $2);}
     | function_call
         {$$ = $1;}
     | IDENTIFIER
