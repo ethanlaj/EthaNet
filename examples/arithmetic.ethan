@@ -1,0 +1,10 @@
+ethan addResult = 10 + 5;
+ethan subResult = 10 - 5;
+ethan multResult = 10 * 5;
+ethan divResult = 10 / 5;
+ethan modResult = 10 % 5;
+
+addResult = addResult + 2;
+subResult = subResult - 2;
+multResult = multResult * 2;
+divResult = divResult / 2;

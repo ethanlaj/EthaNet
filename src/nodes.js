@@ -206,6 +206,18 @@ class BreakStatementNode extends Node {
 	}
 }
 
+class AssignmentStatementNode extends Node {
+	constructor(left, right) {
+		super();
+		this.left = left;
+		this.right = right;
+	}
+
+	accept(visitor) {
+		visitor.visitAssignmentStatementNode(this);
+	}
+}
+
 const Operator = {
 	Plus: '+',
 	Minus: '-',
@@ -249,4 +261,5 @@ module.exports = {
 	ContinueStatementNode,
 	BreakStatementNode,
 	ArrayLiteralNode,
+	AssignmentStatementNode,
 };

@@ -1,0 +1,8 @@
+ethan gt = 10 > 5;
+ethan ls = 10 < 5;
+ethan gte = 10 >= 5;
+ethan gte2 = 10 >= 10;
+ethan lte = 10 <= 5;
+ethan lte2 = 10 <= 10;
+ethan eq = 10 == 5;
+ethan ne = 10 != 5;

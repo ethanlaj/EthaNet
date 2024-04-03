@@ -273,13 +273,15 @@ factor
     : LPAREN expression RPAREN
         {$$ = $2;}
     | NUMBER
-        {$$ = new LiteralNode($1);}
+        {$$ = new LiteralNode(Number($1));}
     | STRING_LITERAL
         {$$ = new LiteralNode($1);}
     | TRUE
         {$$ = new LiteralNode(true);}
     | FALSE
         {$$ = new LiteralNode(false);}
+    | NOT factor
+        {$$ = new UnaryExpressionNode(Operator.Not, $2);}
     | function_call
         {$$ = $1;}
     | IDENTIFIER

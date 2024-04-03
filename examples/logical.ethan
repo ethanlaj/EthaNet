@@ -1,0 +1,12 @@
+ethan x = no;
+if (!x) {
+   print("true");
+}
+
+if (x || yes) {
+   print("true");
+}
+
+if (x && yes) {
+   print("true");
+}
