@@ -1,8 +1,9 @@
 var readline = require('readline');
 var parser = require('./parser.js');
 const Interpreter = require('./interpreter');
+const ExecutionContext = require('./executionContext.js');
 
-const interpreter = new Interpreter();
+const interpreter = new Interpreter(new ExecutionContext());
 
 const rl = readline.createInterface({
 	input: process.stdin,
