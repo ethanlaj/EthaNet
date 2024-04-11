@@ -11,7 +11,7 @@ class ProgramNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitProgramNode(this);
+		return visitor.visitProgramNode(this);
 	}
 }
 
@@ -23,7 +23,7 @@ class VariableDeclarationNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitVariableDeclarationNode(this);
+		return visitor.visitVariableDeclarationNode(this);
 	}
 }
 
@@ -36,7 +36,7 @@ class BinaryExpressionNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitBinaryExpressionNode(this);
+		return visitor.visitBinaryExpressionNode(this);
 	}
 }
 
@@ -48,7 +48,7 @@ class UnaryExpressionNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitUnaryExpressionNode(this);
+		return visitor.visitUnaryExpressionNode(this);
 	}
 }
 
@@ -61,7 +61,7 @@ class FunctionDeclarationNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitFunctionDeclarationNode(this);
+		return visitor.visitFunctionDeclarationNode(this);
 	}
 }
 
@@ -73,7 +73,7 @@ class FunctionCallNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitFunctionCallNode(this);
+		return visitor.visitFunctionCallNode(this);
 	}
 }
 
@@ -84,7 +84,7 @@ class LiteralNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitLiteralNode(this);
+		return visitor.visitLiteralNode(this);
 	}
 }
 
@@ -95,7 +95,7 @@ class IdentifierNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitIdentifierNode(this);
+		return visitor.visitIdentifierNode(this);
 	}
 }
 
@@ -106,7 +106,7 @@ class BlockStatementNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitBlockStatementNode(this);
+		return visitor.visitBlockStatementNode(this);
 	}
 }
 
@@ -119,7 +119,7 @@ class IfStatementNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitIfStatementNode(this);
+		return visitor.visitIfStatementNode(this);
 	}
 }
 
@@ -131,7 +131,7 @@ class WhileLoopNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitWhileLoopNode(this);
+		return visitor.visitWhileLoopNode(this);
 	}
 }
 
@@ -145,7 +145,7 @@ class ForLoopNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitForLoopNode(this);
+		return visitor.visitForLoopNode(this);
 	}
 }
 
@@ -157,7 +157,7 @@ class ArrayAccessNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitArrayAccessNode(this);
+		return visitor.visitArrayAccessNode(this);
 	}
 }
 
@@ -168,7 +168,7 @@ class ArrayLiteralNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitArrayLiteralNode(this);
+		return visitor.visitArrayLiteralNode(this);
 	}
 }
 
@@ -179,7 +179,7 @@ class ReturnStatementNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitReturnStatementNode(this);
+		return visitor.visitReturnStatementNode(this);
 	}
 }
 
@@ -190,19 +190,19 @@ class ExpressionStatementNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitExpressionStatementNode(this);
+		return visitor.visitExpressionStatementNode(this);
 	}
 }
 
 class ContinueStatementNode extends Node {
 	accept(visitor) {
-		visitor.visitContinueStatementNode(this);
+		return visitor.visitContinueStatementNode(this);
 	}
 }
 
 class BreakStatementNode extends Node {
 	accept(visitor) {
-		visitor.visitBreakStatementNode(this);
+		return visitor.visitBreakStatementNode(this);
 	}
 }
 
@@ -214,34 +214,11 @@ class AssignmentStatementNode extends Node {
 	}
 
 	accept(visitor) {
-		visitor.visitAssignmentStatementNode(this);
+		return visitor.visitAssignmentStatementNode(this);
 	}
 }
 
-const Operator = {
-	Plus: '+',
-	Minus: '-',
-	Multiply: '*',
-	Divide: '/',
-	Modulus: '%',
-	LessThan: '<',
-	GreaterThan: '>',
-	LessThanOrEqual: '<=',
-	GreaterThanOrEqual: '>=',
-	Equal: '==',
-	NotEqual: '!=',
-	And: '&&',
-	Or: '||',
-	Not: '!',
-	Assignment: '=',
-	Increment: '++',
-	Decrement: '--',
-	UnaryPlus: '+',
-	UnaryMinus: '-',
-};
-
 module.exports = {
-	Operator,
 	ProgramNode,
 	VariableDeclarationNode,
 	BinaryExpressionNode,

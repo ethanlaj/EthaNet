@@ -1,6 +1,5 @@
 %{
-    const { 
-        Operator,
+    const {
         ProgramNode,
         VariableDeclarationNode, 
         BinaryExpressionNode, 
@@ -21,6 +20,8 @@
         BreakStatementNode,
         ArrayLiteralNode
     } = require('./nodes');
+
+    const Operator = require('./operator');
 %}
 
 /* lexical grammar */
