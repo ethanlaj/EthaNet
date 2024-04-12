@@ -1,5 +1,6 @@
 const ExecutionContext = require('./executionContext');
 const Operator = require('./operator');
+const ControlFlow = require('./controlFlow');
 
 class Interpreter {
 	constructor(context = null) {
@@ -128,11 +129,37 @@ class Interpreter {
 	}
 
 	visitWhileLoopNode(node) {
+		while (true) {
+			const conditionResult = this.visit(node.condition);
+			if (!conditionResult) break;
 
+			const bodyResult = this.visit(node.body);
+			if (bodyResult === ControlFlow.Break) {
+				break;
+			} else if (bodyResult === ControlFlow.Continue) {
+				continue;
+			}
+		}
 	}
 
 	visitForLoopNode(node) {
+		this.visit(node.init);
 
+		while (true) {
+			const conditionResult = this.visit(node.condition);
+			if (!conditionResult) break;
+
+			const bodyResult = this.visit(node.body);
+			if (bodyResult === ControlFlow.Break) {
+				break;
+			}
+
+			this.visit(node.update);
+
+			if (bodyResult === ControlFlow.Continue) {
+				continue;
+			}
+		}
 	}
 
 	visitArrayAccessNode(node) {
@@ -152,11 +179,11 @@ class Interpreter {
 	}
 
 	visitContinueStatementNode(node) {
-
+		return ControlFlow.Continue;
 	}
 
 	visitBreakStatementNode(node) {
-
+		return ControlFlow.Break;
 	}
 
 	visitAssignmentStatementNode(node) {
