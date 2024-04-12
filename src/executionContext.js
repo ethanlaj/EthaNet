@@ -33,7 +33,6 @@ class ExecutionContext {
 		if (name in this.variables) {
 			return this.variables[name];
 		} else if (this.parent !== null) {
-			console.log('getting from the parent')
 			return this.parent.getVariable(name);
 		}
 

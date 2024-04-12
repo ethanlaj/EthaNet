@@ -19,7 +19,7 @@ rl.on('line', (line) => {
 		var result = interpreter.visit(ast);
 		console.log(result);
 	} catch (e) {
-		console.error('Parse error:', e.message);
+		console.error('Error:', e);
 	}
 	rl.prompt();
 }).on('close', () => {

@@ -1,6 +1,7 @@
 const ExecutionContext = require('./executionContext');
 const Operator = require('./operator');
 const ControlFlow = require('./controlFlow');
+const { IdentifierNode } = require('./nodes');
 
 class Interpreter {
 	constructor(context = null) {
@@ -66,6 +67,18 @@ class Interpreter {
 
 	visitUnaryExpressionNode(node) {
 		const operator = node.operator;
+
+		// Handle increment and decrement operators
+		if (node.argument instanceof IdentifierNode) {
+			const variable = this.scope.getVariable(node.argument.name);
+
+			if (operator === Operator.Increment) {
+				return this.scope.assignVariable(node.argument.name, variable + 1);
+			} else if (operator === Operator.Decrement) {
+				return this.scope.assignVariable(node.argument.name, variable - 1);
+			}
+		}
+
 		const argument = this.visit(node.argument);
 
 		switch (operator) {
@@ -73,10 +86,6 @@ class Interpreter {
 				return -argument;
 			case Operator.Not:
 				return !argument;
-			case Operator.Increment:
-				return argument++;
-			case Operator.Decrement:
-				return argument--;
 			default:
 				throw new Error(`Unrecognized operator ${operator}`);
 		}
@@ -115,7 +124,13 @@ class Interpreter {
 		const newScope = new ExecutionContext(this.scope);
 		this.scope = newScope;
 
-		node.statements.forEach(statement => this.visit(statement));
+		for (let statement of node.statements) {
+			const result = this.visit(statement);
+			if (result?.type === "continue" || result?.type === "break") {
+				this.scope = this.scope.parent;
+				return result;
+			}
+		}
 
 		this.scope = this.scope.parent;
 	}
@@ -143,7 +158,7 @@ class Interpreter {
 	}
 
 	visitForLoopNode(node) {
-		this.visit(node.init);
+		this.visit(node.initializer);
 
 		while (true) {
 			const conditionResult = this.visit(node.condition);
