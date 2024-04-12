@@ -130,6 +130,11 @@ class Interpreter {
 				this.scope = this.scope.parent;
 				return result;
 			}
+
+			if (result?.type === "return") {
+				this.scope = this.scope.parent;
+				return result.value;
+			}
 		}
 
 		this.scope = this.scope.parent;
@@ -178,15 +183,22 @@ class Interpreter {
 	}
 
 	visitArrayAccessNode(node) {
+		const array = this.scope.getVariable(node.identifier);
 
+		if (!Array.isArray(array)) {
+			throw new Error(`${node.identifier} is not an array`);
+		}
+		const index = this.visit(node.index);
+
+		return array[index];
 	}
 
 	visitArrayLiteralNode(node) {
-
+		return node.elements.map(element => this.visit(element));
 	}
 
 	visitReturnStatementNode(node) {
-
+		return ControlFlow.Return(this.visit(node.expression));
 	}
 
 	visitExpressionStatementNode(node) {

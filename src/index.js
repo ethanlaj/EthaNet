@@ -5,24 +5,47 @@ const ExecutionContext = require('./executionContext.js');
 
 const interpreter = new Interpreter(new ExecutionContext());
 
-const rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout,
-	prompt: 'ethanet > '
-});
+// const rl = readline.createInterface({
+// 	input: process.stdin,
+// 	output: process.stdout,
+// 	prompt: 'ethanet > '
+// });
 
-rl.prompt();
+// rl.prompt();
 
-rl.on('line', (line) => {
+// rl.on('line', (line) => {
+// 	try {
+// 		var ast = parser.parse(line);
+// 		var result = interpreter.visit(ast);
+// 		console.log(result);
+// 	} catch (e) {
+// 		console.error('Error:', e);
+// 	}
+// 	rl.prompt();
+// }).on('close', () => {
+// 	console.log('Exiting ethanet console.');
+// 	process.exit(0);
+// });
+
+const fs = require('fs');
+const path = require('path');
+
+const filePath = path.join(__dirname, 'test.ethan');
+
+// Read the file content
+fs.readFile(filePath, 'utf8', (err, source) => {
+	if (err) {
+		console.error('Error reading the file:', err);
+		return;
+	}
+
 	try {
-		var ast = parser.parse(line);
-		var result = interpreter.visit(ast);
+		// Parse the entire file content
+		const ast = parser.parse(source);
+		// Visit the AST and execute
+		const result = interpreter.visit(ast);
 		console.log(result);
 	} catch (e) {
 		console.error('Error:', e);
 	}
-	rl.prompt();
-}).on('close', () => {
-	console.log('Exiting ethanet console.');
-	process.exit(0);
 });
