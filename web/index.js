@@ -1,5 +1,6 @@
-var parser = require('./parser.js');
-var JSONFormatter = require('json-formatter-js');
+var parser = require('./copiedFromSrc/parser.js');
+const Interpreter = require('./copiedFromSrc/interpreter');
+const ExecutionContext = require('./copiedFromSrc/executionContext.js');
 
 (function () {
 	document.addEventListener("DOMContentLoaded", init);
@@ -13,19 +14,29 @@ var JSONFormatter = require('json-formatter-js');
 		const input = document.getElementById('input');
 		const output = document.getElementById('output');
 
-		const line = input.value;
+		const source = input.value;
 
-		var parserOutput;
+		const interpreter = new Interpreter(new ExecutionContext());
+
+		// Override console.log temporarily
+		const originalConsoleLog = console.log;
+		let logContent = '';
+
+		console.log = function (message) {
+			logContent += message + '<br>';
+		};
+
 		try {
-			parserOutput = parser.parse(line);
+			const ast = parser.parse(source);
+			interpreter.visit(ast);
+
+			output.innerHTML = '';
+			output.innerHTML = logContent;
 		} catch (e) {
-			output.innerHTML = 'Parse error: ' + e.message;
+			output.innerHTML = 'Error: ' + e.message;
 			return;
+		} finally {
+			console.log = originalConsoleLog;
 		}
-
-		console.log({ parserOutput })
-
-		output.innerHTML = '';
-		output.appendChild(new JSONFormatter(parserOutput, Infinity).render());
 	}
 })();

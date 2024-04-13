@@ -2,7 +2,7 @@
   "name": "ethanet",
   "scripts": {
     "dev": "nodemon --watch 'src/**' --ignore 'src/parser.js' --exec 'jison src/parser.jison -o src/parser.js && node src/index.js'",
-    "build": "jison src/parser.jison -o web/parser.js && cp src/nodes.js web && webpack --mode=production"
+    "build": "jison src/parser.jison -o src/parser.js && cp src/* web/copiedFromSrc && webpack --mode=production"
   },
   "dependencies": {
     "jison": "^0.4.18",
