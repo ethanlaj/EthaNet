@@ -1,8 +1,14 @@
+const systemFunctions = require('./systemFunctions');
+
 class ExecutionContext {
 	constructor(parent = null) {
 		this.parent = parent;
 		this.variables = {};
 		this.functions = {};
+
+		if (parent === null) {
+			this.initSystemFunctions();
+		}
 	}
 
 	assignVariable(name, value) {
@@ -47,6 +53,12 @@ class ExecutionContext {
 		}
 
 		throw new Error(`Function ${name} not defined`);
+	}
+
+	initSystemFunctions() {
+		Object.entries(systemFunctions).forEach(([name, func]) => {
+			this.defineFunction(name, func);
+		});
 	}
 }
 

@@ -97,19 +97,24 @@ class Interpreter {
 
 	visitFunctionCallNode(node) {
 		const func = this.scope.getFunction(node.callee);
-		const newScope = new ExecutionContext(this.scope);
 
-		for (let i = 0; i < node.args.length; i++) {
-			const arg = node.args[i];
-			const param = func.params[i];
-			const value = this.visit(arg);
-			newScope.defineVariable(param, value);
+		if (typeof func === 'function') {
+			return func(...node.args.map(arg => this.visit(arg)));
+		} else {
+			const newScope = new ExecutionContext(this.scope);
+
+			for (let i = 0; i < node.args.length; i++) {
+				const arg = node.args[i];
+				const param = func.params[i];
+				const value = this.visit(arg);
+				newScope.defineVariable(param, value);
+			}
+
+			this.scope = newScope;
+			const result = this.visit(func.body);
+			this.scope = this.scope.parent;
+			return result;
 		}
-
-		this.scope = newScope;
-		const result = this.visit(func.body);
-		this.scope = this.scope.parent;
-		return result;
 	}
 
 	visitLiteralNode(node) {

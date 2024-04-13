@@ -43,8 +43,7 @@ fs.readFile(filePath, 'utf8', (err, source) => {
 		// Parse the entire file content
 		const ast = parser.parse(source);
 		// Visit the AST and execute
-		const result = interpreter.visit(ast);
-		console.log(result);
+		interpreter.visit(ast);
 	} catch (e) {
 		console.error('Error:', e);
 	}
