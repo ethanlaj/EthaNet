@@ -45,6 +45,7 @@
 "}"                             return 'RBRACE'
 "=="                            return 'EQUAL'
 "!="                            return 'NOTEQUAL'
+"~="                            return 'APPROXEQUAL'
 "<="                            return 'LESSTHANEQUAL'
 "<"                             return 'LESSTHAN'
 ">="                            return 'GREATERTHANEQUAL'
@@ -260,6 +261,8 @@ equality_expression
         {$$ = new BinaryExpressionNode($1, Operator.Equal, $3);}
     | equality_expression NOTEQUAL relational_expression
         {$$ = new BinaryExpressionNode($1, Operator.NotEqual, $3);}
+    | equality_expression APPROXEQUAL relational_expression
+        {$$ = new BinaryExpressionNode($1, Operator.ApproxEqual, $3);}
     | relational_expression
         {$$ = $1;}
     ;

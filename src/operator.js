@@ -10,6 +10,7 @@ const Operator = {
 	GreaterThanOrEqual: '>=',
 	Equal: '==',
 	NotEqual: '!=',
+	ApproxEqual: '~=',
 	And: '&&',
 	Or: '||',
 	Not: '!',

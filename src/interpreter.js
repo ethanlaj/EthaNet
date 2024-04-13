@@ -74,6 +74,9 @@ class Interpreter {
 				return left === right;
 			case Operator.NotEqual:
 				return left !== right;
+			case Operator.ApproxEqual:
+				const sigFig = Math.pow(10, Math.floor(Math.log10(Math.abs(left))) - 1);
+				return Math.abs(left - right) <= sigFig;
 			case Operator.LessThan:
 				return left < right;
 			case Operator.LessThanOrEqual:

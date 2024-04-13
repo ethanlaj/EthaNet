@@ -8,4 +8,4 @@
 // 	print(i);
 // }
 
-print(gcd(15, 3));
+// print(gcd(15, 3));
