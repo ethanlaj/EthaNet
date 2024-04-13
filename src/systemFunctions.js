@@ -39,4 +39,24 @@ module.exports = {
 	isFizzBuzz(num) {
 		return module.exports.isFizz(num) && module.exports.isBuzz(num);
 	},
+
+	// Math functions
+	gcd(a, b) {
+		if (typeof a !== "number" || typeof b !== "number") {
+			throw new Error("gcd expects two numbers");
+		}
+
+		if (b === 0) {
+			return a;
+		}
+
+		return module.exports.gcd(b, a % b);
+	},
+	pow(base, exp) {
+		if (typeof base !== "number" || typeof exp !== "number") {
+			throw new Error("pow expects two numbers");
+		}
+
+		return Math.pow(base, exp);
+	}
 }
