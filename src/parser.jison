@@ -57,6 +57,11 @@
 "null"                          return 'NULL'
 "undefined"                     return 'UNDEFINED'
 ([a-z]|_)([a-zA-Z]|[0-9])*      return 'IDENTIFIER'
+"+="                            return 'ADDASSIGN'
+"-="                            return 'SUBTRACTASSIGN'
+"*="                            return 'MULTASSIGN'
+"/="                            return 'DIVASSIGN'
+"%="                            return 'MODASSIGN'
 "="                             return 'ASSIGN'
 [0-9]+("."[0-9]+)?\b            return 'NUMBER'
 "*"                             return 'MULT'
@@ -106,6 +111,8 @@ statement
     : variable_declaration
         {$$ = $1;}
     | assignment_statement
+        {$$ = $1;}
+    | operator_assign_expression SEMI
         {$$ = $1;}
     | if_statement
         {$$ = $1;}
@@ -159,6 +166,19 @@ assignment_statement
         {$$ = new AssignmentStatementNode($1, $3);}
     ;
 
+operator_assign_expression
+    : add_assignment_statement
+        {$$ = $1;}
+    | subtract_assignment_statement
+        {$$ = $1;}
+    | multiply_assignment_statement
+        {$$ = $1;}
+    | divide_assignment_statement
+        {$$ = $1;}
+    | modassign_expression
+        {$$ = $1;}
+    ;
+
 return_statement
     : RETURN expression SEMI
         {$$ = new ReturnStatementNode($2);}
@@ -184,10 +204,17 @@ while_loop
     ;
 
 for_loop
-    : FOR LPAREN expression_statement expression_statement expression RPAREN block
+    : FOR LPAREN expression_statement expression_statement for_loop_update RPAREN block
         {$$ = new ForLoopNode($3, $4, $5, $7);}
-    | FOR LPAREN variable_declaration expression_statement expression RPAREN block
+    | FOR LPAREN variable_declaration expression_statement for_loop_update RPAREN block
         {$$ = new ForLoopNode($3, $4, $5, $7);}
+    ;
+
+for_loop_update
+    : expression
+        {$$ = $1;}
+    | operator_assign_expression
+        {$$ = $1;}
     ;
 
 function_definition
@@ -305,6 +332,31 @@ increment_expression
 decrement_expression
     : IDENTIFIER DECREMENT
         {$$ = new UnaryExpressionNode(Operator.Decrement, new IdentifierNode($1));}
+    ;
+
+add_assignment_statement
+    : IDENTIFIER ADDASSIGN expression
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.AddEqual, $3);}
+    ;
+
+subtract_assignment_statement
+    : IDENTIFIER SUBTRACTASSIGN expression
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.MinusEqual, $3);}
+    ;
+
+multiply_assignment_statement
+    : IDENTIFIER MULTASSIGN expression
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.MultiplyEqual, $3);}
+    ;
+
+divide_assignment_statement
+    : IDENTIFIER DIVASSIGN expression
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.DivideEqual, $3);}
+    ;
+
+modassign_expression
+    : IDENTIFIER MODASSIGN expression
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.Modulus, $3);}
     ;
 
 function_call

@@ -4,14 +4,6 @@ print(x[3]);
 ethan jenna = "this is a string";
 print(ethanify(jenna));
 
-for (ethan i = 1; i <= 15; i++) {
-	if (isFizzBuzz(i)) {
-		print('fizzbuzz');
-	} else if (isFizz(i)) {
-		print('fizz');
-	} else if (isBuzz(i)) {
-		print('buzz');
-	} else {
-		print(i);
-	}
+for (ethan i = 1; i <= 15; i += 3) {
+	print(i);
 }

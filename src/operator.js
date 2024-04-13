@@ -18,6 +18,11 @@ const Operator = {
 	Decrement: '--',
 	UnaryPlus: '+',
 	UnaryMinus: '-',
+	AddEqual: '+=',
+	SubtractEqual: '-=',
+	MultiplyEqual: '*=',
+	DivideEqual: '/=',
+	ModulusEqual: '%=',
 };
 
 module.exports = Operator;

@@ -33,6 +33,30 @@ class Interpreter {
 		const left = this.visit(node.left);
 		const right = this.visit(node.right);
 
+		if (node.left instanceof IdentifierNode) {
+			const variableName = node.left.name;
+
+			// Put operators here that absolutely require a variable on the left
+
+			switch (node.operator) {
+				case Operator.AddEqual:
+					return this.scope.assignVariable(variableName, left + right);
+				case Operator.SubtractEqual:
+					return this.scope.assignVariable(variableName, left - right);
+				case Operator.MultiplyEqual:
+					return this.scope.assignVariable(variableName, left * right);
+				case Operator.DivideEqual:
+					return this.scope.assignVariable(variableName, left / right);
+				case Operator.ModulusEqual:
+					return this.scope.assignVariable(variableName, left % right);
+				default:
+					// Continue with next switch block
+					// Could be comparing two variables
+					break;
+			}
+		}
+
+
 		switch (node.operator) {
 			case Operator.Plus:
 				return left + right;
