@@ -28,8 +28,8 @@
 %lex
 %%
 
-\"(\\.|[^"\\])*\"               return 'STRING_LITERAL';
-\'(\\.|[^'\\])*\'               return 'STRING_LITERAL';
+\"(\\.|[^"\\])*\"               { yytext = yytext.slice(1, -1); return 'STRING_LITERAL'; }
+\'(\\.|[^'\\])*\'               { yytext = yytext.slice(1, -1); return 'STRING_LITERAL'; }
 \s+                             /* skip whitespace */
 "//".*							/* skip comments */
 "ethan"                         return 'VAR'

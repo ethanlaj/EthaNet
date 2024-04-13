@@ -9,3 +9,6 @@
 // }
 
 // print(gcd(15, 3));
+
+ethan x = yes;
+print("ethan");
