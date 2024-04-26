@@ -92,6 +92,8 @@
 start
     : program
         {return $1;}
+    | EOF
+        {return null;}
     ;
 
 program

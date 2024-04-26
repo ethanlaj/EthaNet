@@ -9,7 +9,7 @@ class Interpreter {
 	}
 
 	visit(node) {
-		return node.accept(this);
+		return node?.accept(this);
 	}
 
 	visitProgramNode(node) {
@@ -126,6 +126,7 @@ class Interpreter {
 		const func = this.scope.getFunction(node.callee);
 
 		if (typeof func === 'function') {
+			console.log(node.args);
 			return func(...node.args.map(arg => this.visit(arg)));
 		} else {
 			const newScope = new ExecutionContext(this.scope);
