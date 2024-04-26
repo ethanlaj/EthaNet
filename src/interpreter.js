@@ -1,7 +1,7 @@
 const ExecutionContext = require('./executionContext');
 const Operator = require('./operator');
 const ControlFlow = require('./controlFlow');
-const { IdentifierNode } = require('./nodes');
+const { IdentifierNode, ArrayAccessNode } = require('./nodes');
 
 class Interpreter {
 	constructor(context = null) {
@@ -215,7 +215,12 @@ class Interpreter {
 	}
 
 	visitArrayAccessNode(node) {
-		const array = this.scope.getVariable(node.identifier);
+		let array;
+		if (node.identifier instanceof ArrayAccessNode) {
+			array = this.visit(node.identifier);
+		} else {
+			array = this.scope.getVariable(node.identifier);
+		}
 
 		if (!Array.isArray(array)) {
 			throw new Error(`${node.identifier} is not an array`);

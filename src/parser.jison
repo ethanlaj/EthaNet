@@ -383,4 +383,6 @@ arguments
 array_access
     : IDENTIFIER LBRACKET expression RBRACKET
         {$$ = new ArrayAccessNode($1, $3);}
+    | array_access LBRACKET expression RBRACKET
+        {$$ = new ArrayAccessNode($1, $3);}
     ;

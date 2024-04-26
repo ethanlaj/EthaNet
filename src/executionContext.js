@@ -36,6 +36,10 @@ class ExecutionContext {
 	}
 
 	getVariable(name) {
+		if (typeof name !== 'string') {
+			throw new Error('Variable name must be a string. Got ' + typeof name + ' instead.');
+		}
+
 		if (name in this.variables) {
 			return this.variables[name];
 		} else if (this.parent !== null) {

@@ -1,15 +1,30 @@
-// ethan x = [1,2,3,4+5,100];
-// print(x[3]);
-// 
-// ethan str = "this is a string";
-// print(ethanify(str));
-// 
-// for (ethan i = 1; i <= 15; i += 3) {
-// 	print(i);
-// }
+// Main function to print a 2D array
+laj main() {
+    // Define a 2D array
+    ethan matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
 
-// print(gcd(15, 3));
+    // Loop through each row of the matrix
+    for (ethan i = 0; i < length(matrix); i++) {
+        // Initialize an empty string to hold the row for printing
+        ethan rowString = "";
 
-// ethan x = yes;
-// print("ethan is so cool");
+        // Loop through each element in the current row
+        for (ethan j = 0; j < length(matrix); j++) {
+            // Append each element to the rowString followed by a space for separation
+            rowString += matrix[i][j] + " ";
+        }
+
+        // Print the current row
+        print(rowString);
+    }
+
+	print(contains(matrix, [1,2,3]));
+}
+
+// Call the main function to execute the program
+main();
 
