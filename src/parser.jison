@@ -221,7 +221,7 @@ for_loop_update
 function_definition
     : FUNCTION IDENTIFIER LPAREN parameters RPAREN block
         {$$ = new FunctionDeclarationNode($2, $4, $6);}
-    : FUNCTION IDENTIFIER LPAREN RPAREN block
+    | FUNCTION IDENTIFIER LPAREN RPAREN block
         {$$ = new FunctionDeclarationNode($2, [], $5);}
     ;
 
