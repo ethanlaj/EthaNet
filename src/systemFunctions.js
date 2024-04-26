@@ -58,6 +58,17 @@ module.exports = {
 		}
 
 		return Math.pow(base, exp);
+	},
+
+	// Other
+	length(value) {
+		if (typeof value === "string") {
+			return value.length;
+		} else if (Array.isArray(value)) {
+			return value.length;
+		} else {
+			throw new Error("length expects a string or an array");
+		}
 	}
 }
 
