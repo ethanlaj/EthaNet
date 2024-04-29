@@ -72,12 +72,20 @@ module.exports = {
 			throw new Error("sum expects an array");
 		}
 
+		if (arr.some(value => typeof value !== "number")) {
+			throw new Error("sum expects an array of numbers");
+		}
+
 		return arr.reduce((acc, curr) => acc + curr, 0);
 	},
 	average(arr) {
 		if (!Array.isArray(arr)) {
 			throw new Error("average expects an array");
 		}
+
+		if (arr.some(value => typeof value !== "number")) {
+			throw new Error("average expects an array of numbers");
+		} A
 
 		return module.exports.sum(arr) / arr.length;
 	},
