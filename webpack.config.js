@@ -26,7 +26,4 @@ module.exports = {
 			"path": false,
 		}
 	},
-	optimization: {
-		minimize: false,
-	},
 };
