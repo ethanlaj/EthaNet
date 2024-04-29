@@ -138,9 +138,14 @@ class Interpreter {
 			}
 
 			this.scope = newScope;
-			const result = this.visit(func.body);
-			this.scope = this.scope.parent;
-			return result;
+			try {
+				const result = this.visit(func.body);
+				if (result?.type === 'return') {
+					return result.value;
+				}
+			} finally {
+				this.scope = this.scope.parent;
+			}
 		}
 	}
 
@@ -156,40 +161,40 @@ class Interpreter {
 		const newScope = new ExecutionContext(this.scope);
 		this.scope = newScope;
 
-		for (let statement of node.statements) {
-			const result = this.visit(statement);
-			if (result?.type === "continue" || result?.type === "break") {
-				this.scope = this.scope.parent;
-				return result;
+		try {
+			for (let statement of node.statements) {
+				const result = this.visit(statement);
+				if (result?.type === "continue" || result?.type === "break" || result?.type === "return") {
+					return result;
+				}
 			}
-
-			if (result?.type === "return") {
-				this.scope = this.scope.parent;
-				return result.value;
-			}
+		} finally {
+			this.scope = this.scope.parent;
 		}
-
-		this.scope = this.scope.parent;
 	}
 
 	visitIfStatementNode(node) {
 		if (this.visit(node.condition)) {
-			this.visit(node.consequent);
+			return this.visit(node.consequent);
 		} else if (node.alternate) {
-			this.visit(node.alternate);
+			return this.visit(node.alternate);
 		}
 	}
 
 	visitWhileLoopNode(node) {
+		loop:
 		while (true) {
 			const conditionResult = this.visit(node.condition);
-			if (!conditionResult) break;
+			if (!conditionResult) break loop;
 
 			const bodyResult = this.visit(node.body);
-			if (bodyResult === ControlFlow.Break) {
-				break;
-			} else if (bodyResult === ControlFlow.Continue) {
-				continue;
+			switch (bodyResult?.type) {
+				case 'break':
+					break loop;
+				case 'continue':
+					continue loop;
+				case 'return':
+					return bodyResult;
 			}
 		}
 	}
@@ -197,20 +202,23 @@ class Interpreter {
 	visitForLoopNode(node) {
 		this.visit(node.initializer);
 
+		loop:
 		while (true) {
 			const conditionResult = this.visit(node.condition);
 			if (!conditionResult) break;
 
 			const bodyResult = this.visit(node.body);
-			if (bodyResult === ControlFlow.Break) {
-				break;
+			switch (bodyResult?.type) {
+				case 'break':
+					break loop;
+				case 'continue':
+					this.visit(node.update);
+					continue loop;
+				case 'return':
+					return bodyResult;
 			}
 
 			this.visit(node.update);
-
-			if (bodyResult === ControlFlow.Continue) {
-				continue;
-			}
 		}
 	}
 

@@ -185,6 +185,8 @@ operator_assign_expression
 return_statement
     : RETURN expression SEMI
         {$$ = new ReturnStatementNode($2);}
+    | RETURN SEMI
+        {$$ = new ReturnStatementNode(null);}
     ;
 
 expression_statement
