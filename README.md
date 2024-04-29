@@ -1,4 +1,4 @@
-# Ethanet
+# Ethaneta
 
 Welcome to the Ethanet programming language repository. Ethanet is designed to be a simple with some unique features compared to other languages. It was named after the creator, Ethan Lajeunesse.
 
