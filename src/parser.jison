@@ -317,6 +317,10 @@ factor
         {$$ = new LiteralNode(true);}
     | FALSE
         {$$ = new LiteralNode(false);}
+    | NULL
+        {$$ = new LiteralNode(null);}
+    | UNDEFINED
+        {$$ = new LiteralNode(undefined);}
     | NOT factor
         {$$ = new UnaryExpressionNode(Operator.Not, $2);}
     | SUBTRACT factor
