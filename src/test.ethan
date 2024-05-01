@@ -1,21 +1,12 @@
-ethan i = 0;
-
-laj t() {
-    while (i < 10) {
-        ethan j = 0;
-        while (j < 10) {
-            j++;
-
-            if (j == 2) {
-                return 5000;
-            }
-
-            print("j", j);
-        }
-
-        print("i", i);
-        i++;
+// Use the `laj` keyword to define a function
+laj factorial(n) {
+    if (n == 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
     }
 }
 
-print(t());
+// Use the `ethan` keyword to define a variable
+ethan result = factorial(5);
+print("The factorial of 5 is", result);

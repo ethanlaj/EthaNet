@@ -22,8 +22,8 @@ const ExecutionContext = require('./copiedFromSrc/executionContext.js');
 		const originalConsoleLog = console.log;
 		let logContent = '';
 
-		console.log = function (message) {
-			logContent += message + '<br>';
+		console.log = function (...messages) {
+			logContent += messages.join(' ') + '<br>';
 		};
 
 		try {
