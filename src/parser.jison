@@ -354,7 +354,7 @@ add_assignment_statement
 
 subtract_assignment_statement
     : IDENTIFIER SUBTRACTASSIGN expression
-        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.MinusEqual, $3);}
+        {$$ = new BinaryExpressionNode(new IdentifierNode($1), Operator.SubtractEqual, $3);}
     ;
 
 multiply_assignment_statement
