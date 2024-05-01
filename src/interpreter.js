@@ -17,6 +17,9 @@ class Interpreter {
 
 		for (const statement of node.statements) {
 			result = this.visit(statement);
+			if (result?.type === "return") {
+				return result.value;
+			}
 		}
 
 		return result;
